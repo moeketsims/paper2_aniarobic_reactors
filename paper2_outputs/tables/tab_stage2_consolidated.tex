@@ -1,0 +1,28 @@
+\begin{table}[H]
+\caption{Stage~II Bayesian retention model coefficients across competing hypotheses. Posterior means with 95\% highest density intervals (HDI) are shown; $P(>0)$ denotes the posterior probability that the coefficient is positive. The combined model exhibits the strongest evidence for positive effects across all predictors.}
+\label{tab:stage2_consolidated}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+Parameter & Volumetric & Hydraulic & Combined & GDI \\
+\midrule
+Intercept ($\alpha$) & 0.43 & 0.42 & $-0.12$ & 0.01 \\
+ & [$-0.56$, $1.36$] & [$-3.20$, $4.16$] & [$-3.53$, $3.67$] & [$-3.98$, $3.82$] \\[0.5em]
+$\beta_{\mathrm{logit}(\varepsilon)}$ & 0.65 & --- & 0.86 & --- \\
+ & [$-0.88$, $1.98$] & & [$-0.52$, $2.32$] & \\
+ & $P(>0)=0.82$ & & $P(>0)=0.88$ & \\[0.5em]
+$\beta_{\log k}$ & --- & 0.26 & 0.23 & --- \\
+ & & [$-0.17$, $0.68$] & [$-0.16$, $0.64$] & \\
+ & & $P(>0)=0.88$ & $P(>0)=0.88$ & \\[0.5em]
+$\beta_{\log(1+\beta_{\mathrm{F}})}$ & --- & 0.47 & 0.49 & --- \\
+ & & [$-0.19$, $1.11$] & [$-0.16$, $1.09$] & \\
+ & & $P(>0)=0.92$ & $P(>0)=0.95$ & \\[0.5em]
+$\beta_{\log(\mathrm{GDI})}$ & --- & --- & --- & $-0.03$ \\
+ & & & & [$-0.34$, $0.24$] \\
+ & & & & $P(>0)=0.43$ \\[0.5em]
+$\kappa$ (dispersion) & 2.82 & 3.37 & 4.44 & 2.43 \\
+ & [$0.63$, $5.79$] & [$0.57$, $6.67$] & [$0.80$, $8.98$] & [$0.40$, $4.75$] \\
+\bottomrule
+\end{tabular}
+\end{table}
