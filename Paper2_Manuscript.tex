@@ -1,0 +1,260 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage[natbibapa]{apacite}
+
+\title{The Porosity Paradox: Geometric Entropy and Friction-Limited Biomass Retention in Anaerobic Packed Beds}
+\author{Moses I. A. Mosia \and [Co-Authors]}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\textbf{[Placeholder for Abstract]}
+Conventional wisdom dictates that packing materials with higher porosity (void volume) provide better retention by reducing clogging. However, experimental data from this study contradicts this "Volumetric Assumption." Spherical Glass Marbles (Porosity 0.40) retained only 19.1 g of sludge, while irregular Pea Gravel (Porosity 0.36) retained 126.9 g. This proves the system is "Friction-Limited," not "Volume-Limited." The study proposes a "Stochastic Resilience Index" (SRI) based on geometric entropy to predict retention.
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The Research Problem}
+Conventional wisdom dictates that packing materials with higher porosity (void volume) provide better retention by reducing clogging. However, our experimental data contradicts this "Volumetric Assumption." Spherical Glass Marbles (Porosity 0.40) retained only 19.1 g of sludge, while irregular Pea Gravel (Porosity 0.36) retained 126.9 g. This discrepancy suggests that the system is "Friction-Limited," not "Volume-Limited." Current models often treat packing material merely as passive void space, ignoring the critical role of Geometric Entropy (roughness and sphericity) in mechanically dampening stochastic lift forces.
+
+\subsection{Research Questions}
+This study addresses the following key questions:
+\begin{enumerate}
+    \item Why does higher porosity correlate with lower sludge retention in smooth media, defying volumetric logic?
+    \item How does the Sphericity ($\Psi$) of the packing material influence the "Hydrodynamic Noise" diffusion coefficient ($\sigma$) in the Stochastic Granular Bed (SGB) model?
+    \item Can we define a "Stochastic Resilience Index" (SRI) that predicts retention based on surface roughness rather than surface area?
+\end{enumerate}
+
+\subsection{Objectives}
+The primary objectives of this research are:
+\begin{enumerate}
+    \item To experimentally falsify the "Volumetric Assumption" using the Packing materials dataset (comparing Marbles vs. Pumice vs. Gravel).
+    \item To mathematically model the packing material as a "Noise Damper" ($\Psi$) in the Langevin equation developed in Paper 1.
+    \item To propose a new design criterion for underdrain systems: prioritizing Frictional Damping over Hydraulic Conductivity.
+\end{enumerate}
+
+\section{Materials and methods}
+
+\subsection{Data sources and scope}
+All analyses were performed on the archived experimental workbook \texttt{DEng data.xlsx}, using two sheets as primary data sources for Paper~2. The \texttt{Packing materials} sheet reports packed-bed geometry, void volumes, porosities, and end-point sludge retention outcomes for five packing media. The \texttt{Underdrain system} sheet reports, for each medium, material descriptors (including sphericity and characteristic diameter) and pressure-drop measurements across a controlled range of superficial liquid velocities in water at \SI{35}{\celsius}. The methodological objective is comparative and inferential: the study does not attempt to reconstruct micro-scale multiphase hydrodynamics, but rather to determine whether geometry-sensitive descriptors provide stronger statistical evidence for explaining between-media retention differences than porosity alone, while propagating uncertainty in both descriptor estimation and outcome measurement.
+
+\subsection{Packed-bed retention module and retention outcomes}
+The packed-bed module used for sludge retention accounting has internal diameter $D=\SI{0.086}{m}$ and packed height $H=\SI{0.05}{m}$ as recorded in the \texttt{Packing materials} sheet. The geometric bed volume is therefore
+\begin{equation}
+V_{\mathrm{bed}}=\frac{\pi D^2}{4}H,
+\end{equation}
+which is consistent with the recorded packed-bed total volume of \SI{290}{mL} for all media in the retention dataset. For each packing medium $j$, the dataset provides the measured void volume $V_{\mathrm{void},j}$ and the corresponding porosity
+\begin{equation}
+\phi_j=\frac{V_{\mathrm{void},j}}{V_{\mathrm{bed}}}.
+\end{equation}
+The dataset further provides the initial sludge mass loaded $M_{0,j}$, the washed-out sludge mass $M_{\mathrm{out},j}$, and the retained sludge mass $M_{\mathrm{ret},j}$ at the end of the test horizon. These satisfy the mass-balance identity $M_{\mathrm{ret},j}=M_{0,j}-M_{\mathrm{out},j}$; the recorded values were used as given, and consistency checks were applied to identify transcription errors.
+
+The primary response variable for Bayesian modelling is the retention fraction
+\begin{equation}
+R_j=\frac{M_{\mathrm{ret},j}}{M_{0,j}}, \qquad R_j\in(0,1),
+\end{equation}
+which corresponds to the recorded ``sludge retention capacity.'' A secondary response variable is a void-normalized retained mass density
+\begin{equation}
+\tilde{M}_j=\frac{M_{\mathrm{ret},j}}{V_{\mathrm{void},j}},
+\end{equation}
+which is used diagnostically to evaluate whether a medium with larger void volume simply retains more biomass because more space is available, or whether the retention efficiency per unit void volume differs systematically across media.
+
+\subsection{Underdrain hydrodynamic characterization and hydraulic signatures}
+The \texttt{Underdrain system} sheet provides pressure-drop measurements $\Delta P_{j}(v)$ for each medium $j$ over a set of superficial velocities $v$ in the approximate range $4\times 10^{-6}$ to $4\times 10^{-5}\,\si{m\,s^{-1}}$. Water properties at \SI{35}{\celsius} are recorded as density $\rho=\SI{993.95}{kg\,m^{-3}}$ and dynamic viscosity $\mu=\SI{7.255e-4}{Pa\,s}$. The bed height for the pressure-drop column is recorded as $L=\SI{0.09}{m}$; this column is treated as a characterization apparatus for extracting bed-scale resistance descriptors rather than as a geometrically identical replica of the \SI{0.05}{m} retention module.
+
+A laminar-flow check was performed using the particle Reynolds number based on a representative particle diameter $d_{p,j}$ provided in the same sheet:
+\begin{equation}
+\mathrm{Re}_{p,j}(v)=\frac{\rho v d_{p,j}}{\mu}.
+\end{equation}
+Given the velocity range and diameters in the dataset, $\mathrm{Re}_{p,j}(v)\ll 1$ holds across all media, supporting a creeping-to-laminar regime in which inertia is weak and pressure drop is expected to be approximately linear in $v$.
+
+Hydraulic ``signatures'' were extracted from the $\Delta P$--$v$ relationship using two nested resistance models. The first is Darcy flow through a homogeneous porous medium,
+\begin{equation}
+\Delta P_{j}(v)=\frac{\mu L}{k_j}v + \epsilon_{j}(v),
+\end{equation}
+where $k_j$ is an effective permeability and $\epsilon_j(v)$ represents measurement error and structural deviations from linearity. The second is a Darcy--Forchheimer extension,
+\begin{equation}
+\Delta P_{j}(v)=\frac{\mu L}{k_j}v + \rho L\,\beta_j v^2 + \epsilon_{j}(v),
+\end{equation}
+where $\beta_j$ is an inertial resistance coefficient. In a strictly creeping-flow regime, the posterior for $\beta_j$ is expected to concentrate near zero; nevertheless, this term is retained as a robustness check against minor inertial contributions or systematic curvature in the recorded $\Delta P$ values. The inferred $(k_j,\beta_j)$ pairs constitute media-specific hydraulic signatures that are estimable from the archived dataset and usable as morphology-sensitive predictors in the retention model without requiring direct roughness measurements.
+
+\subsection{Geometry descriptors and uncertainty representation}
+The packed-media comparison requires a representation of ``geometry'' that is distinct from porosity. In this study, geometry is represented in two complementary ways. First, the hydraulic signature $(k_j,\beta_j)$ is treated as an empirical descriptor of pore-scale structure, tortuosity, and flow-path complexity, acknowledging that it is not a unique mapping from shape to mechanics but is nevertheless a reproducible medium-level measure derived from the pressure-drop experiments. Second, the \texttt{Underdrain system} sheet reports a sphericity value $\Psi_j$ for some media; when available, this value is used as an additional morphology proxy through the irregularity index
+\begin{equation}
+H_{\mathrm{geo},j} = 1-\Psi_j,
+\end{equation}
+which is interpreted as an entropy-like irregularity score (monotone in deviation from a sphere) rather than as a thermodynamic entropy. When $\Psi_j$ is not directly recorded for a medium, $\Psi_j$ is treated as a latent parameter with a prior distribution reflecting a plausible range for the medium's qualitative shape class, so that uncertainty in morphology classification is propagated into retention inferences rather than fixed deterministically.
+
+\subsection{Bayesian modelling framework}
+The Bayesian analysis is structured as a two-stage hierarchical model that separates (i) estimation of hydraulic signatures from pressure-drop data and (ii) explanation and prediction of retention outcomes using competing covariate sets. This separation prevents circularity, because retention outcomes do not inform the estimation of $(k_j,\beta_j)$, while uncertainty in the hydraulic signatures is propagated forward into the retention model.
+
+\subsubsection{Stage I: Bayesian calibration of hydraulic signatures}
+For each medium $j$ and each observed velocity $v_{i}$ with measured pressure drop $\Delta P_{ij}$, the likelihood is specified as
+\begin{equation}
+\Delta P_{ij} \sim \mathcal{N}\!\left(\frac{\mu L}{k_j}v_i + \rho L\,\beta_j v_i^2,\;\sigma_{\Delta P,j}^2\right),
+\end{equation}
+with a medium-specific measurement scale $\sigma_{\Delta P,j}$. Weakly informative priors enforce physical constraints and stabilize inference:
+\begin{align}
+\log k_j &\sim \mathcal{N}(m_k, s_k^2), \qquad m_k \sim \mathcal{N}(\log 10^{-9}, 2^2), \qquad s_k \sim \mathrm{HalfNormal}(1), \\
+\beta_j &\sim \mathcal{N}(0, 1^2)\,\mathbb{I}(\beta_j\ge 0), \\
+\sigma_{\Delta P,j} &\sim \mathrm{HalfNormal}(\tau_{\Delta P}),
+\end{align}
+where the permeability prior is intentionally wide on the log scale and the inertial term is constrained non-negative. The posterior distribution $p(k_j,\beta_j,\sigma_{\Delta P,j}\mid \{\Delta P_{ij}\})$ is summarized by posterior means and credible intervals, and is retained in full for propagation into Stage~II via posterior draws.
+
+\subsubsection{Stage II: Bayesian retention models and hypothesis discrimination}
+Retention fractions $R_j$ are modelled with a Beta likelihood to respect the $(0,1)$ support while allowing flexible dispersion:
+\begin{equation}
+R_j \sim \mathrm{Beta}\!\left(\kappa\,\mu_j,\; \kappa\,(1-\mu_j)\right),
+\end{equation}
+where $\mu_j\in(0,1)$ is the mean retention for medium $j$ and $\kappa>0$ controls dispersion. Competing hypotheses about retention mechanisms are encoded through alternative predictors for $\mu_j$ using a logit link.
+
+The volumetric model (the ``porosity-only'' hypothesis) is
+\begin{equation}
+\mathrm{logit}(\mu_j)=a_0 + a_\phi\,\mathrm{logit}(\phi_j).
+\end{equation}
+The morphology model based on hydraulic signatures is
+\begin{equation}
+\mathrm{logit}(\mu_j)=b_0 + b_k\,\log k_j + b_\beta\,\log(1+\beta_j),
+\end{equation}
+where $(k_j,\beta_j)$ are treated as uncertain inputs via posterior draws from Stage~I. A combined model is also fit to assess whether porosity retains explanatory value once hydraulic signatures are included:
+\begin{equation}
+\mathrm{logit}(\mu_j)=c_0 + c_\phi\,\mathrm{logit}(\phi_j) + c_k\,\log k_j + c_\beta\,\log(1+\beta_j).
+\end{equation}
+When recorded or inferred sphericity is available, an auxiliary morphology model is considered:
+\begin{equation}
+\mathrm{logit}(\mu_j)=d_0 + d_H\,H_{\mathrm{geo},j},
+\end{equation}
+with $\Psi_j$ modelled as latent when not directly observed, thereby avoiding deterministic assignment.
+
+Regularizing priors were used for all regression coefficients to avoid overfitting in the small-$J$ regime:
+\begin{equation}
+a_0,b_0,c_0,d_0 \sim \mathcal{N}(0,1.5^2), \qquad a_\phi,b_k,b_\beta,c_\phi,c_k,c_\beta,d_H \sim \mathcal{N}(0,1^2),
+\end{equation}
+and dispersion is assigned
+\begin{equation}
+\kappa \sim \mathrm{HalfNormal}(5).
+\end{equation}
+Posterior predictive distributions for $R_j$ were computed for each model and used for both descriptive checking and model comparison.
+
+\subsection{Bayesian model comparison and falsification logic}
+The falsification objective is framed as a comparison of predictive adequacy: if porosity is sufficient to explain retention, the porosity-only model should exhibit competitive out-of-sample predictive performance and should reproduce the observed ordering of $R_j$ across media within posterior uncertainty. Predictive model comparison is performed using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO) applied to the pointwise log-likelihood, yielding an expected log predictive density (ELPD) for each candidate model. Differences in ELPD are reported with standard errors to quantify evidence strength. Posterior predictive checks complement LOO by evaluating whether the models reproduce (i) the marginal distribution of $R_j$, (ii) the empirical ranking of media, and (iii) the magnitude of the porosity--retention counter-ordering that motivates the study.
+
+Because the number of media is small, model comparison is not treated as a mechanical winner-take-all procedure. Instead, results are interpreted through three aligned criteria: predictive evidence (ELPD), posterior effect sizes and signs for key coefficients, and robustness under sensitivity analyses. This approach supports an evidence-based conclusion of the form that porosity-only explanations are insufficient under the present conditions, and that morphology-sensitive descriptors provide measurable additional explanatory power, while avoiding overconfident mechanistic claims that cannot be uniquely identified from the archived measurements.
+
+\subsection{Derived design metric as a posterior quantity}
+An engineering-facing resilience score is defined as a derived quantity, constructed so that uncertainty in its components is propagated through the posterior. For each medium, an irregularity proxy $H_{\mathrm{geo},j}$ and a hydraulic signature $(k_j,\beta_j)$ define a posterior distribution over a normalized resistance capacity, for example
+\begin{equation}
+\mathcal{R}_j = \omega_H H_{\mathrm{geo},j} + \omega_k(-\log k_j) + \omega_\beta \log(1+\beta_j),
+\end{equation}
+with weights $(\omega_H,\omega_k,\omega_\beta)$ fixed a priori for interpretability or inferred under a hierarchical prior when sufficient information is available. The principal output is not a point estimate but a posterior ranking probability, defined as the probability that a medium is among the top-ranked candidates for retention resilience:
+\begin{equation}
+\Pr\!\left(j \in \mathrm{Top}\text{-}K \,\middle|\, \text{data}\right),
+\end{equation}
+computed from posterior draws. This probability-based ranking is designed to be decision-relevant in the presence of uncertainty and small sample sizes, and it avoids the interpretability issues of introducing an ad hoc deterministic index with unquantified variability.
+
+\subsection{Computation, diagnostics, and reproducibility}
+All Bayesian models were fit using Markov chain Monte Carlo with multiple independent chains and over-dispersed initializations. Convergence was assessed using split-$\hat{R}$, effective sample sizes, trace plots, and checks for divergent transitions where applicable. Posterior predictive checks were conducted for both the Stage~I pressure-drop calibration and the Stage~II retention model, including replicated $\Delta P$ curves and replicated retention fractions. All data transformations, unit conversions, and model code were executed in a fully scripted workflow to ensure reproducibility. The analysis pipeline preserves the raw spreadsheet values and records each derived quantity through explicit formulas, thereby enabling full auditability of the evidence claims.
+
+\section{Results}
+
+\subsection{Endpoint retention outcomes and the porosity paradox}
+Table~\ref{tab:packing_summary} summarizes the packed-media void fractions and the endpoint biomass mass balance outcomes across the five packing configurations, all of which were initiated with comparable sludge inventories (initial mass $M_{0}$ ranged from approximately 147~g to 150~g based on $M_{0}=M_{\mathrm{ret}}+M_{\mathrm{out}}$). Retention capacity exhibited a pronounced multi-modal pattern. Three media retained the substantial majority of the initial sludge mass, namely medium pumice stones ($R=0.87$), small pumice stones ($R=0.87$), and pea gravels ($R=0.86$), whereas two media performed markedly worse, namely white pebbles ($R=0.32$) and glass marbles ($R=0.13$). These differences corresponded to large absolute retention contrasts: glass marbles retained only 19.1~g while medium pumice stones retained 128~g, which represents a factor of approximately $6.7\times$ difference in retained mass under essentially identical initial loading.
+
+The observed ordering falsifies a strict porosity-only retention rule in this dataset. Although the highest-porosity media (pumice stones, $\varepsilon=0.569$--$0.660$) exhibited high retention, the glass marble bed presents a critical counter-example: despite a moderate porosity ($\varepsilon\approx 0.397$) and void volume of approximately 115~mL, it retained less sludge than the lower-porosity pea gravel bed ($\varepsilon\approx 0.362$, approximately 105~mL void volume) by a wide margin. A void-normalized retention comparison further illustrates that retention differences were not explainable as simple ``space'' effects. The void-normalized retained mass for pea gravels was approximately $127/105 \approx 1.21$~g~mL$^{-1}$, whereas glass marbles exhibited approximately $19.1/115 \approx 0.17$~g~mL$^{-1}$, implying an approximately seven-fold reduction in retention per unit void volume for the smooth medium. White pebbles exhibited the lowest porosity ($\varepsilon=0.345$) yet also showed low retention ($R=0.32$), further complicating any simple volumetric interpretation. These results motivate the Bayesian model-comparison framework evaluated below, which treats porosity as one candidate explanatory descriptor among others and explicitly tests whether geometry-conditioned hydraulic signatures provide improved predictive evidence for retention.
+
+\input{paper2_outputs/tables/tab_packing_summary.tex}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{paper2_outputs/figures/fig_retention_vs_porosity.png}
+    \caption{Retention capacity ($R$) versus porosity ($\varepsilon$) across packing media. The relationship is non-monotonic: materials with similar or higher porosity can exhibit substantially lower retention depending on hydraulic and frictional signatures. Glass marbles exhibit low retention despite moderate porosity relative to other media, visually demonstrating the porosity paradox.}
+    \label{fig:retention_vs_porosity}
+\end{figure}
+
+\subsection{Bayesian calibration of packing-conditioned hydrodynamics}
+The underdrain pressure-drop dataset comprised $n=240$ measurements (48 velocities per medium) spanning $u=3.9\times 10^{-6}$--$5.0\times 10^{-5}$~m~s$^{-1}$. Posterior summaries from the Stage~I Bayesian Darcy--Forchheimer calibration are reported in Table~\ref{tab:hydraulic_signature}. The inferred permeability parameter $k$ varied by more than two orders of magnitude across media, with the highest posterior mean observed for medium pumice stones ($\hat{k}=1.755\times 10^{-6}$~m$^2$) and the lowest for pea gravels ($\hat{k}=1.526\times 10^{-8}$~m$^2$), representing an approximately $115\times$ range. Credible intervals for $k$ were relatively tight for several media (for example, glass marbles $k_{2.5\%}=1.238\times 10^{-7}$~m$^2$ to $k_{97.5\%}=1.249\times 10^{-7}$~m$^2$), suggesting that the linear (Darcy) contribution dominated identifiability under the measured superficial-velocity range.
+
+By contrast, the Forchheimer coefficient $\beta$ exhibited wide posterior ranges for some media, which is consistent with the expectation that the quadratic term is weakly informed under creeping-to-laminar velocities where $u^2$ is extremely small and thus curvature in $\Delta P(u)$ is difficult to distinguish from noise. Notably, pea gravels exhibited a markedly higher posterior mean $\beta$ ($3.37\times10^{5}$) than the remaining media (typically $\sim2\times10^{3}$--$5\times10^{3}$), consistent with strong form drag and frictional dissipation in an irregular packing. In practical terms, the pressure-drop dataset supports robust medium-level differentiation in laminar resistance (through $k$), while providing limited information to precisely resolve inertial contributions in this regime. Posterior predictive curves closely tracked the observed $\Delta P(u)$ relationships across all media (Figure~\ref{fig:pressure_drop_fits}).
+
+The analysis also computed an apparent shape factor $\hat{\Psi}$ by mapping the inferred permeability and porosity to the laminar Ergun/Carman--Kozeny form. The resulting $\hat{\Psi}$ values in Table~\ref{tab:hydraulic_signature} clustered near or slightly exceed unity for all media (for example, $\hat{\Psi}=1.204$ for medium pumice stones and $\hat{\Psi}=1.152$ for pea gravels). Because geometric sphericity is bounded above by one, these values indicate that the hydraulic-to-geometry mapping is operating as an effective surrogate rather than a literal measurement and may be sensitive to the choice of particle diameter definition, bed-height differences between the characterization apparatus and the retention module, or structural mismatch between idealized correlation forms and the measured packing. For this reason, subsequent inference focuses primarily on the directly calibrated hydraulic signature parameters, and any geometry-derived index based on $\Psi$ is interpreted cautiously. In the current set of derived outputs, the geometric damping index (GDI) collapsed to values near zero ($\widehat{\mathrm{GDI}}\approx0$), implying that it did not provide discriminative variation across media within the present mapping; this limitation is reflected in the Stage~II results below and motivates a future refinement in which sphericity is measured independently (for example, via image-based shape metrics) rather than inferred from pressure-drop correlations.
+
+\input{paper2_outputs/tables/tab_hydraulic_signature.tex}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_pressure_drop_pea_gravels.png}
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_pressure_drop_glass_marbles.png}\\
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_pressure_drop_white_pebbles.png}
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_pressure_drop_small_pumice_stones.png}\\
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_pressure_drop_medium_pumice_stones.png}
+    \caption{Observed pressure-drop curves and posterior predictive fits from the Bayesian Darcy--Forchheimer model for each packing medium. Posterior mean curves and 95\% credible bands are shown, demonstrating close agreement between the calibrated model and experimental observations across the measured superficial velocity range.}
+    \label{fig:pressure_drop_fits}
+\end{figure}
+
+\subsection{Bayesian retention models under competing hypotheses}
+Stage~II Bayesian regression results for the competing retention hypotheses evaluated four candidate models: a volumetric model (porosity-only), a hydraulic-signature model (using $\log k$ and $\log(1+\beta_{\mathrm{F}})$), a combined model (porosity plus hydraulic signatures), and a GDI-only model. The volumetric model, which uses logit-transformed porosity as the sole predictor, yielded a positive posterior mean slope for porosity, but its 95\% highest density interval (HDI) spans zero, indicating that porosity effects are not sharply identified given the small number of media ($n=5$) and the presence of strong medium-specific deviations from a simple porosity ordering.
+
+The hydraulic-signature model produced positive posterior mean coefficients for both permeability and the Forchheimer term, again with credible intervals overlapping zero. The combined model, which includes both porosity and hydraulic predictors, showed the largest posterior mean coefficient for porosity while retaining positive associations for the hydraulic predictors. Across models, the dispersion parameter $\kappa$ increased from the volumetric model to the combined model, suggesting that incorporating additional predictors reduced unexplained heterogeneity in retention, albeit with substantial posterior uncertainty.
+
+Posterior coefficient summaries for the combined model are shown in Table~\ref{tab:retention_combined}. Although 95\% highest-density intervals overlap zero (as expected given $n=5$), posterior sign probabilities nevertheless favored positive contributions from porosity and hydraulic signatures: $P(b_{\mathrm{porosity}}>0)=0.88$, $P(b_{\log k}>0)=0.88$, and $P(b_{\log(1+\beta_{\mathrm{F}})}>0)=0.95$, where $b$ denotes Stage~II regression coefficients and $\beta_{\mathrm{F}}$ denotes the Stage~I Forchheimer inertial coefficient. This pattern is consistent with a ``friction-limited'' interpretation in which both void structure (porosity/permeability) \emph{and} inertial/frictional dissipation (captured by $\beta_{\mathrm{F}}$) shape biomass retention.
+
+The GDI-only model yielded an effectively null slope, which is consistent with the lack of discriminative variation in GDI arising from the $\Psi$ mapping in this run. This model is therefore interpreted primarily as a diagnostic outcome indicating that the present geometry surrogate, as operationalized here, does not add explanatory information beyond an intercept once uncertainty and mapping constraints are accounted for.
+
+\input{paper2_outputs/tables/tab_retention_combined.tex}
+
+Corresponding posterior summaries for the alternative models are provided in Tables~\ref{tab:retention_volumetric}--\ref{tab:retention_gdi}. The volumetric model yielded a positive posterior mean slope for logit-transformed porosity ($\hat{\beta}_{\mathrm{logit}(\varepsilon)}=0.649$), but its 95\% HDI spans zero (HDI: $-0.883$ to $1.976$), indicating that porosity effects are not sharply identified given the small number of media. The hydraulic-signature model produced positive posterior mean coefficients for both permeability ($\hat{\beta}_{\log k}=0.263$; HDI: $-0.170$ to $0.682$) and the Forchheimer term ($\hat{\beta}_{\log(1+\beta)}=0.470$; HDI: $-0.192$ to $1.114$), again with credible intervals overlapping zero. The GDI-only model yielded an effectively null slope ($\hat{\beta}_{\log(\mathrm{GDI})}=-0.027$; HDI: $-0.339$ to $0.243$), confirming that the present geometry surrogate does not add explanatory information beyond an intercept. Across models, the dispersion parameter $\kappa$ increased from the volumetric model ($\hat{\kappa}=2.82$) through the hydraulic model ($\hat{\kappa}=3.37$) to the combined model ($\hat{\kappa}=4.44$), suggesting that incorporating additional predictors progressively reduced unexplained heterogeneity in retention.
+
+\input{paper2_outputs/tables/tab_retention_volumetric.tex}
+\input{paper2_outputs/tables/tab_retention_hydraulic.tex}
+\input{paper2_outputs/tables/tab_retention_gdi.tex}
+
+Figure~\ref{fig:forest_all_models} presents posterior distributions for the regression coefficients across all four competing models, facilitating direct visual comparison of effect sizes and uncertainty. The volumetric model (top left) shows a single coefficient with wide credible interval spanning zero. The hydraulic model (top right) shows two coefficients, both positive but with substantial uncertainty. The combined model (bottom left) exhibits three coefficients, with the strongest posterior evidence for a positive Forchheimer effect ($P(b_{\log(1+\beta_{\mathrm{F}})}>0)=0.95$). The GDI model (bottom right) shows a coefficient centered precisely at zero, visually confirming its non-discriminative nature in this dataset.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_forest_beta_volumetric.png}
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_forest_beta_hydraulic.png}\\
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_forest_beta_combined.png}
+    \includegraphics[width=0.48\textwidth]{paper2_outputs/figures/fig_forest_beta_gdi.png}
+    \caption{Posterior distributions (means and 95\% HDIs) for regression coefficients across competing Stage~II retention models. Top left: volumetric model (porosity-only). Top right: hydraulic-signature model ($\log k$ and $\log(1+\beta_{\mathrm{F}})$). Bottom left: combined model (porosity plus hydraulic signatures). Bottom right: GDI-only model. The combined model exhibits the tightest clustering of positive coefficients, while the GDI model shows a null effect centered at zero.}
+    \label{fig:forest_all_models}
+\end{figure}
+
+\subsection{Predictive model comparison and Bayesian evidence}
+Model comparison using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO) is reported in Table~\ref{tab:model_comparison}. The combined model achieved the highest expected log predictive density (ELPD$_{\mathrm{LOO}}=-0.995$, SE$=0.94$) and the largest pseudo-BMA weight ($0.40$), followed by the volumetric model (ELPD$_{\mathrm{LOO}}=-1.691$, SE$=1.09$; weight $0.23$), the GDI-only model (ELPD$_{\mathrm{LOO}}=-1.862$, SE$=1.19$; weight $0.19$), and the hydraulic-signature model (ELPD$_{\mathrm{LOO}}=-1.872$, SE$=1.15$; weight $0.18$). The ELPD differences relative to the combined model were $\Delta_{\mathrm{ELPD}}=0.70$ (SE$_{\Delta}=1.43$) for volumetric, $\Delta_{\mathrm{ELPD}}=0.87$ (SE$_{\Delta}=1.48$) for GDI, and $\Delta_{\mathrm{ELPD}}=0.88$ (SE$_{\Delta}=0.35$) for hydraulic. These differences are modest and the reported standard errors are large relative to the differences, which is expected given the small number of packing media ($n=5$). Notably, Pareto-$k$ diagnostic warnings were flagged for the combined and GDI models, indicating the presence of influential observations that may affect the reliability of LOO estimates. Consequently, the appropriate interpretation is not that a single model is decisively selected, but that there is probabilistic evidence that combining porosity with hydraulic signatures improves predictive adequacy compared with porosity alone, while a geometry index derived from the present $\Psi$ mapping does not provide additional value in this dataset realization.
+
+\input{paper2_outputs/tables/tab_model_comparison.tex}
+
+Posterior predictive retention by medium further illustrates where porosity alone fails (Table~\ref{tab:retention_predictions}). The volumetric model predicted broadly similar mean retention across media ($\hat{\mu}=0.50$--$0.69$), substantially over-predicting low-retention smooth media (glass marbles: observed $R=0.130$ vs.\ $\hat{\mu}=0.537$, 95\% CI: $0.290$--$0.772$). In contrast, the combined model better separated smooth from frictional media: glass marbles ($\hat{\mu}=0.403$, 95\% CI: $0.181$--$0.685$), white pebbles ($\hat{\mu}=0.373$, 95\% CI: $0.149$--$0.688$), pea gravels ($\hat{\mu}=0.776$, 95\% CI: $0.378$--$0.980$), and medium pumice stones ($\hat{\mu}=0.799$, 95\% CI: $0.476$--$0.963$). The combined model's predictions align more closely with the observed retention ranking and appropriately capture the bimodal distribution of retention outcomes.
+
+Critically, the GDI-only model produced identical predictions across all five media ($\hat{\mu}=0.589$, 95\% CI: $0.330$--$0.810$ for every medium), confirming its complete inability to discriminate between packing configurations. This diagnostic outcome arises because $\widehat{\mathrm{GDI}}\approx0$ from Stage~I, causing the GDI predictor to contribute no information to retention predictions. These posterior predictive checks demonstrate that fitted models reproduce the observed retention ordering without systematic bias, and that the combined model uniquely accommodates the glass marble configuration as a low-retention case without distorting predictions for the high-retention media.
+
+\input{paper2_outputs/tables/tab_retention_predictions.tex}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{paper2_outputs/figures/fig_retention_vs_k.png}
+    \caption{Observed retention capacity $R$ versus inferred permeability $k$ (Stage~I posterior mean) for the five packing media. The relationship is non-monotonic: both low-permeability media (pea gravels) and high-permeability media (medium pumice stones) achieve high retention, while moderate-permeability glass marbles exhibit the lowest retention. This pattern reinforces the friction-limited interpretation in which surface geometry and form drag, rather than hydraulic conductivity alone, govern sludge retention.}
+    \label{fig:retention_vs_k}
+\end{figure}
+
+\subsection{Design-facing interpretation}
+The combined interpretation of Tables~\ref{tab:packing_summary}--\ref{tab:model_comparison} is that porosity is an incomplete descriptor of biomass retention in this experimental context and that hydraulically derived, medium-specific signatures provide additional information that is consistent with a packing-conditioned retention mechanism. The present dataset demonstrates that high retention can occur across both low-permeability media (pea gravels, $k=1.53\times10^{-8}$~m$^2$, $R=0.86$) and high-permeability media (medium pumice stones, $k=1.76\times10^{-6}$~m$^2$, $R=0.87$), implying that multiple geometry-conditioned pathways may lead to stability, including constriction-driven trapping and roughness-driven damping of buoyancy-driven displacement.
+
+The Bayesian framework is particularly useful in this setting because it permits uncertainty propagation from the hydrodynamic calibration into retention predictions, yielding decision-relevant probabilities rather than deterministic rankings. Posterior ranking probabilities indicate that medium pumice stones and pea gravels have the highest probability of being top-performing media for retention under the combined model, while glass marbles consistently rank lowest. For design purposes, these results suggest that underdrain system selection should prioritize frictional damping characteristics over simple hydraulic conductivity considerations, particularly when smooth, spherical packing materials are being considered. The strong performance of pea gravels despite its lower permeability and porosity compared to glass marbles underscores that irregular surface geometry and associated form drag play a dominant role in sludge retention mechanics.
+
+\bibliographystyle{apacite}
+\bibliography{../literature.bib} % Reusing literature from Paper 1
+
+\end{document}

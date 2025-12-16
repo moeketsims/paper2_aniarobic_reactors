@@ -1,0 +1,143 @@
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{setspace}
+\setstretch{1.15}
+
+\title{Beyond Porosity: A Bayesian Model-Comparison Framework for Biomass Retention in Anaerobic Packed Beds Using Hydraulic Signatures}
+\author{[Author name(s)]}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Packed-bed anaerobic reactors are routinely designed with a volumetric heuristic in which higher void fraction is assumed to imply improved biomass retention through increased interstitial capacity and delayed clogging, yet the packing-media outcomes in the present study exhibit a counter-ordering in which a smoother medium with moderate porosity retains substantially less sludge than rougher media with comparable or lower porosity. This paper develops a Bayesian, uncertainty-aware evidence framework that tests whether retention is adequately explained by porosity alone, or whether packing morphology must be represented through measurable ``hydraulic signatures'' extracted from pressure-drop data, with the central research questions being whether a porosity-only model can predict observed retention fractions once measurement uncertainty is propagated, whether morphology-sensitive descriptors improve out-of-sample predictive performance under principled Bayesian model comparison, and whether an engineering-facing probabilistic ranking of media resilience can be derived as a posterior quantity suitable for design decisions.
+
+\section{Materials and methods}
+
+\subsection{Data sources and scope}
+All analyses were performed on the archived experimental workbook \texttt{DEng data.xlsx}, using two sheets as primary data sources for Paper~2. The \texttt{Packing materials} sheet reports packed-bed geometry, void volumes, porosities, and end-point sludge retention outcomes for five packing media. The \texttt{Underdrain system} sheet reports, for each medium, material descriptors (including sphericity and characteristic diameter) and pressure-drop measurements across a controlled range of superficial liquid velocities in water at \SI{35}{\celsius}. The methodological objective is comparative and inferential: the study does not attempt to reconstruct micro-scale multiphase hydrodynamics, but rather to determine whether geometry-sensitive descriptors provide stronger statistical evidence for explaining between-media retention differences than porosity alone, while propagating uncertainty in both descriptor estimation and outcome measurement.
+
+\subsection{Packed-bed retention module and retention outcomes}
+The packed-bed module used for sludge retention accounting has internal diameter $D=\SI{0.086}{m}$ and packed height $H=\SI{0.05}{m}$ as recorded in the \texttt{Packing materials} sheet. The geometric bed volume is therefore
+\begin{equation}
+V_{\mathrm{bed}}=\frac{\pi D^2}{4}H,
+\end{equation}
+which is consistent with the recorded packed-bed total volume of \SI{290}{mL} for all media in the retention dataset. For each packing medium $j$, the dataset provides the measured void volume $V_{\mathrm{void},j}$ and the corresponding porosity
+\begin{equation}
+\phi_j=\frac{V_{\mathrm{void},j}}{V_{\mathrm{bed}}}.
+\end{equation}
+The dataset further provides the initial sludge mass loaded $M_{0,j}$, the washed-out sludge mass $M_{\mathrm{out},j}$, and the retained sludge mass $M_{\mathrm{ret},j}$ at the end of the test horizon. These satisfy the mass-balance identity $M_{\mathrm{ret},j}=M_{0,j}-M_{\mathrm{out},j}$; the recorded values were used as given, and consistency checks were applied to identify transcription errors.
+
+The primary response variable for Bayesian modelling is the retention fraction
+\begin{equation}
+R_j=\frac{M_{\mathrm{ret},j}}{M_{0,j}}, \qquad R_j\in(0,1),
+\end{equation}
+which corresponds to the recorded ``sludge retention capacity.'' A secondary response variable is a void-normalized retained mass density
+\begin{equation}
+\tilde{M}_j=\frac{M_{\mathrm{ret},j}}{V_{\mathrm{void},j}},
+\end{equation}
+which is used diagnostically to evaluate whether a medium with larger void volume simply retains more biomass because more space is available, or whether the retention efficiency per unit void volume differs systematically across media.
+
+\subsection{Underdrain hydrodynamic characterization and hydraulic signatures}
+The \texttt{Underdrain system} sheet provides pressure-drop measurements $\Delta P_{j}(v)$ for each medium $j$ over a set of superficial velocities $v$ in the approximate range $4\times 10^{-6}$ to $4\times 10^{-5}\,\si{m\,s^{-1}}$. Water properties at \SI{35}{\celsius} are recorded as density $\rho=\SI{993.95}{kg\,m^{-3}}$ and dynamic viscosity $\mu=\SI{7.255e-4}{Pa\,s}$. The bed height for the pressure-drop column is recorded as $L=\SI{0.09}{m}$; this column is treated as a characterization apparatus for extracting bed-scale resistance descriptors rather than as a geometrically identical replica of the \SI{0.05}{m} retention module.
+
+A laminar-flow check was performed using the particle Reynolds number based on a representative particle diameter $d_{p,j}$ provided in the same sheet:
+\begin{equation}
+\mathrm{Re}_{p,j}(v)=\frac{\rho v d_{p,j}}{\mu}.
+\end{equation}
+Given the velocity range and diameters in the dataset, $\mathrm{Re}_{p,j}(v)\ll 1$ holds across all media, supporting a creeping-to-laminar regime in which inertia is weak and pressure drop is expected to be approximately linear in $v$.
+
+Hydraulic ``signatures'' were extracted from the $\Delta P$--$v$ relationship using two nested resistance models. The first is Darcy flow through a homogeneous porous medium,
+\begin{equation}
+\Delta P_{j}(v)=\frac{\mu L}{k_j}v + \epsilon_{j}(v),
+\end{equation}
+where $k_j$ is an effective permeability and $\epsilon_j(v)$ represents measurement error and structural deviations from linearity. The second is a Darcy--Forchheimer extension,
+\begin{equation}
+\Delta P_{j}(v)=\frac{\mu L}{k_j}v + \rho L\,\beta_j v^2 + \epsilon_{j}(v),
+\end{equation}
+where $\beta_j$ is an inertial resistance coefficient. In a strictly creeping-flow regime, the posterior for $\beta_j$ is expected to concentrate near zero; nevertheless, this term is retained as a robustness check against minor inertial contributions or systematic curvature in the recorded $\Delta P$ values. The inferred $(k_j,\beta_j)$ pairs constitute media-specific hydraulic signatures that are estimable from the archived dataset and usable as morphology-sensitive predictors in the retention model without requiring direct roughness measurements.
+
+\subsection{Geometry descriptors and uncertainty representation}
+The packed-media comparison requires a representation of ``geometry'' that is distinct from porosity. In this study, geometry is represented in two complementary ways. First, the hydraulic signature $(k_j,\beta_j)$ is treated as an empirical descriptor of pore-scale structure, tortuosity, and flow-path complexity, acknowledging that it is not a unique mapping from shape to mechanics but is nevertheless a reproducible medium-level measure derived from the pressure-drop experiments. Second, the \texttt{Underdrain system} sheet reports a sphericity value $\Psi_j$ for some media; when available, this value is used as an additional morphology proxy through the irregularity index
+\begin{equation}
+H_{\mathrm{geo},j} = 1-\Psi_j,
+\end{equation}
+which is interpreted as an entropy-like irregularity score (monotone in deviation from a sphere) rather than as a thermodynamic entropy. When $\Psi_j$ is not directly recorded for a medium, $\Psi_j$ is treated as a latent parameter with a prior distribution reflecting a plausible range for the medium's qualitative shape class, so that uncertainty in morphology classification is propagated into retention inferences rather than fixed deterministically.
+
+\subsection{Bayesian modelling framework}
+The Bayesian analysis is structured as a two-stage hierarchical model that separates (i) estimation of hydraulic signatures from pressure-drop data and (ii) explanation and prediction of retention outcomes using competing covariate sets. This separation prevents circularity, because retention outcomes do not inform the estimation of $(k_j,\beta_j)$, while uncertainty in the hydraulic signatures is propagated forward into the retention model.
+
+\subsubsection{Stage I: Bayesian calibration of hydraulic signatures}
+For each medium $j$ and each observed velocity $v_{i}$ with measured pressure drop $\Delta P_{ij}$, the likelihood is specified as
+\begin{equation}
+\Delta P_{ij} \sim \mathcal{N}\!\left(\frac{\mu L}{k_j}v_i + \rho L\,\beta_j v_i^2,\;\sigma_{\Delta P,j}^2\right),
+\end{equation}
+with a medium-specific measurement scale $\sigma_{\Delta P,j}$. Weakly informative priors enforce physical constraints and stabilize inference:
+\begin{align}
+\log k_j &\sim \mathcal{N}(m_k, s_k^2), \qquad m_k \sim \mathcal{N}(\log 10^{-9}, 2^2), \qquad s_k \sim \mathrm{HalfNormal}(1), \\
+\beta_j &\sim \mathcal{N}(0, 1^2)\,\mathbb{I}(\beta_j\ge 0), \\
+\sigma_{\Delta P,j} &\sim \mathrm{HalfNormal}(\tau_{\Delta P}),
+\end{align}
+where the permeability prior is intentionally wide on the log scale and the inertial term is constrained non-negative. The posterior distribution $p(k_j,\beta_j,\sigma_{\Delta P,j}\mid \{\Delta P_{ij}\})$ is summarized by posterior means and credible intervals, and is retained in full for propagation into Stage~II via posterior draws.
+
+\subsubsection{Stage II: Bayesian retention models and hypothesis discrimination}
+Retention fractions $R_j$ are modelled with a Beta likelihood to respect the $(0,1)$ support while allowing flexible dispersion:
+\begin{equation}
+R_j \sim \mathrm{Beta}\!\left(\kappa\,\mu_j,\; \kappa\,(1-\mu_j)\right),
+\end{equation}
+where $\mu_j\in(0,1)$ is the mean retention for medium $j$ and $\kappa>0$ controls dispersion. Competing hypotheses about retention mechanisms are encoded through alternative predictors for $\mu_j$ using a logit link.
+
+The volumetric model (the ``porosity-only'' hypothesis) is
+\begin{equation}
+\mathrm{logit}(\mu_j)=a_0 + a_\phi\,\mathrm{logit}(\phi_j).
+\end{equation}
+The morphology model based on hydraulic signatures is
+\begin{equation}
+\mathrm{logit}(\mu_j)=b_0 + b_k\,\log k_j + b_\beta\,\log(1+\beta_j),
+\end{equation}
+where $(k_j,\beta_j)$ are treated as uncertain inputs via posterior draws from Stage~I. A combined model is also fit to assess whether porosity retains explanatory value once hydraulic signatures are included:
+\begin{equation}
+\mathrm{logit}(\mu_j)=c_0 + c_\phi\,\mathrm{logit}(\phi_j) + c_k\,\log k_j + c_\beta\,\log(1+\beta_j).
+\end{equation}
+When recorded or inferred sphericity is available, an auxiliary morphology model is considered:
+\begin{equation}
+\mathrm{logit}(\mu_j)=d_0 + d_H\,H_{\mathrm{geo},j},
+\end{equation}
+with $\Psi_j$ modelled as latent when not directly observed, thereby avoiding deterministic assignment.
+
+Regularizing priors were used for all regression coefficients to avoid overfitting in the small-$J$ regime:
+\begin{equation}
+a_0,b_0,c_0,d_0 \sim \mathcal{N}(0,1.5^2), \qquad a_\phi,b_k,b_\beta,c_\phi,c_k,c_\beta,d_H \sim \mathcal{N}(0,1^2),
+\end{equation}
+and dispersion is assigned
+\begin{equation}
+\kappa \sim \mathrm{HalfNormal}(5).
+\end{equation}
+Posterior predictive distributions for $R_j$ were computed for each model and used for both descriptive checking and model comparison.
+
+\subsection{Bayesian model comparison and falsification logic}
+The falsification objective is framed as a comparison of predictive adequacy: if porosity is sufficient to explain retention, the porosity-only model should exhibit competitive out-of-sample predictive performance and should reproduce the observed ordering of $R_j$ across media within posterior uncertainty. Predictive model comparison is performed using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO) applied to the pointwise log-likelihood, yielding an expected log predictive density (ELPD) for each candidate model. Differences in ELPD are reported with standard errors to quantify evidence strength. Posterior predictive checks complement LOO by evaluating whether the models reproduce (i) the marginal distribution of $R_j$, (ii) the empirical ranking of media, and (iii) the magnitude of the porosity--retention counter-ordering that motivates the study.
+
+Because the number of media is small, model comparison is not treated as a mechanical winner-take-all procedure. Instead, results are interpreted through three aligned criteria: predictive evidence (ELPD), posterior effect sizes and signs for key coefficients, and robustness under sensitivity analyses. This approach supports an evidence-based conclusion of the form that porosity-only explanations are insufficient under the present conditions, and that morphology-sensitive descriptors provide measurable additional explanatory power, while avoiding overconfident mechanistic claims that cannot be uniquely identified from the archived measurements.
+
+\subsection{Derived design metric as a posterior quantity}
+An engineering-facing resilience score is defined as a derived quantity, constructed so that uncertainty in its components is propagated through the posterior. For each medium, an irregularity proxy $H_{\mathrm{geo},j}$ and a hydraulic signature $(k_j,\beta_j)$ define a posterior distribution over a normalized resistance capacity, for example
+\begin{equation}
+\mathcal{R}_j = \omega_H H_{\mathrm{geo},j} + \omega_k(-\log k_j) + \omega_\beta \log(1+\beta_j),
+\end{equation}
+with weights $(\omega_H,\omega_k,\omega_\beta)$ fixed a priori for interpretability or inferred under a hierarchical prior when sufficient information is available. The principal output is not a point estimate but a posterior ranking probability, defined as the probability that a medium is among the top-ranked candidates for retention resilience:
+\begin{equation}
+\Pr\!\left(j \in \mathrm{Top}\text{-}K \,\middle|\, \text{data}\right),
+\end{equation}
+computed from posterior draws. This probability-based ranking is designed to be decision-relevant in the presence of uncertainty and small sample sizes, and it avoids the interpretability issues of introducing an ad hoc deterministic index with unquantified variability.
+
+\subsection{Computation, diagnostics, and reproducibility}
+All Bayesian models were fit using Markov chain Monte Carlo with multiple independent chains and over-dispersed initializations. Convergence was assessed using split-$\hat{R}$, effective sample sizes, trace plots, and checks for divergent transitions where applicable. Posterior predictive checks were conducted for both the Stage~I pressure-drop calibration and the Stage~II retention model, including replicated $\Delta P$ curves and replicated retention fractions. All data transformations, unit conversions, and model code were executed in a fully scripted workflow to ensure reproducibility. The analysis pipeline preserves the raw spreadsheet values and records each derived quantity through explicit formulas, thereby enabling full auditability of the evidence claims.
+
+\end{document}
