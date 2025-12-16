@@ -19,29 +19,30 @@
 \maketitle
 
 \begin{abstract}
-\textbf{[Placeholder for Abstract]}
-Conventional wisdom dictates that packing materials with higher porosity (void volume) provide better retention by reducing clogging. However, experimental data from this study contradicts this "Volumetric Assumption." Spherical Glass Marbles (Porosity 0.40) retained only 19.1 g of sludge, while irregular Pea Gravel (Porosity 0.36) retained 126.9 g. This proves the system is "Friction-Limited," not "Volume-Limited." The study proposes a "Stochastic Resilience Index" (SRI) based on geometric entropy to predict retention.
+Conventional wisdom in anaerobic reactor design assumes that packing materials with higher porosity provide better biomass retention by increasing interstitial capacity and reducing clogging. However, experimental data from this study contradict this ``Volumetric Assumption'': spherical glass marbles (porosity 0.40) retained only 19.1~g of sludge, while irregular pea gravel (porosity 0.36) retained 126.9~g---a $6.7\times$ difference demonstrating that the system is ``friction-limited'' rather than ``volume-limited.'' This paper develops a Bayesian model-comparison framework to test whether porosity alone explains retention, or whether morphology-sensitive ``hydraulic signatures'' extracted from pressure-drop data provide superior predictive power. A two-stage hierarchical approach was employed: Stage~I calibrated medium-specific permeability ($k$) and Forchheimer inertial coefficients ($\beta$) via Bayesian Darcy--Forchheimer regression; Stage~II compared four competing Beta-regression retention models (volumetric, hydraulic, combined, and geometry-derived) using Pareto-smoothed importance sampling leave-one-out cross-validation (PSIS-LOO). Results show that the combined model incorporating both porosity and hydraulic signatures achieved the highest expected log predictive density (ELPD$_{\mathrm{LOO}}=-0.995$) and pseudo-BMA weight (0.40), while the porosity-only model systematically over-predicted retention for smooth media. Posterior sign probabilities strongly favored positive effects for both permeability ($P(b_{\log k}>0)=0.88$) and Forchheimer coefficient ($P(b_{\log(1+\beta)}>0)=0.95$), supporting a friction-limited retention mechanism. These findings suggest that underdrain system design should prioritize frictional damping characteristics over simple hydraulic conductivity, with packing material selection guided by posterior ranking probabilities rather than deterministic porosity-based criteria.
 \end{abstract}
 
 \section{Introduction}
 
 \subsection{The Research Problem}
-Conventional wisdom dictates that packing materials with higher porosity (void volume) provide better retention by reducing clogging. However, our experimental data contradicts this "Volumetric Assumption." Spherical Glass Marbles (Porosity 0.40) retained only 19.1 g of sludge, while irregular Pea Gravel (Porosity 0.36) retained 126.9 g. This discrepancy suggests that the system is "Friction-Limited," not "Volume-Limited." Current models often treat packing material merely as passive void space, ignoring the critical role of Geometric Entropy (roughness and sphericity) in mechanically dampening stochastic lift forces.
+Packed-bed anaerobic reactors are routinely designed with a volumetric heuristic in which higher void fraction is assumed to imply improved biomass retention through increased interstitial capacity and delayed clogging. However, the packing-media outcomes in the present study exhibit a counter-ordering that contradicts this ``Volumetric Assumption'': spherical glass marbles with moderate porosity ($\varepsilon=0.40$) retained only 19.1~g of sludge, while irregular pea gravel with lower porosity ($\varepsilon=0.36$) retained 126.9~g. This paradox suggests that the system is ``friction-limited'' rather than ``volume-limited,'' and that current models treating packing material merely as passive void space ignore the critical role of packing morphology---specifically roughness and sphericity---in mechanically dampening hydrodynamic forces that would otherwise displace retained biomass.
+
+This paper develops a Bayesian, uncertainty-aware evidence framework that tests whether retention is adequately explained by porosity alone, or whether packing morphology must be represented through measurable ``hydraulic signatures'' extracted from pressure-drop data. The central research questions are: (i)~whether a porosity-only model can predict observed retention fractions once measurement uncertainty is propagated; (ii)~whether morphology-sensitive descriptors improve out-of-sample predictive performance under principled Bayesian model comparison; and (iii)~whether an engineering-facing probabilistic ranking of media resilience can be derived as a posterior quantity suitable for design decisions.
 
 \subsection{Research Questions}
-This study addresses the following key questions:
+This study addresses the following key questions through Bayesian inference and model comparison:
 \begin{enumerate}
-    \item Why does higher porosity correlate with lower sludge retention in smooth media, defying volumetric logic?
-    \item How does the Sphericity ($\Psi$) of the packing material influence the "Hydrodynamic Noise" diffusion coefficient ($\sigma$) in the Stochastic Granular Bed (SGB) model?
-    \item Can we define a "Stochastic Resilience Index" (SRI) that predicts retention based on surface roughness rather than surface area?
+    \item Why does higher porosity correlate with lower sludge retention in smooth media, defying volumetric logic, and can this counter-ordering be reproduced within posterior uncertainty by any single-predictor model?
+    \item Do hydraulic signatures---permeability ($k$) and inertial resistance coefficient ($\beta$)---extracted from pressure-drop data provide stronger statistical evidence for explaining between-media retention differences than porosity alone?
+    \item Can a probabilistic ranking of packing media for retention resilience be derived from posterior distributions, enabling uncertainty-aware design decisions rather than deterministic index-based selection?
 \end{enumerate}
 
 \subsection{Objectives}
 The primary objectives of this research are:
 \begin{enumerate}
-    \item To experimentally falsify the "Volumetric Assumption" using the Packing materials dataset (comparing Marbles vs. Pumice vs. Gravel).
-    \item To mathematically model the packing material as a "Noise Damper" ($\Psi$) in the Langevin equation developed in Paper 1.
-    \item To propose a new design criterion for underdrain systems: prioritizing Frictional Damping over Hydraulic Conductivity.
+    \item To experimentally falsify the ``Volumetric Assumption'' using Bayesian model comparison (PSIS-LOO cross-validation) across competing retention hypotheses applied to five packing media (glass marbles, pea gravels, white pebbles, small pumice stones, and medium pumice stones).
+    \item To develop a two-stage Bayesian hierarchical framework that separates hydraulic signature estimation (Stage~I: Darcy--Forchheimer calibration) from retention prediction (Stage~II: Beta regression), thereby propagating uncertainty without circularity.
+    \item To propose a new design criterion for underdrain systems that prioritizes frictional damping characteristics over simple hydraulic conductivity, supported by posterior ranking probabilities rather than ad hoc deterministic indices.
 \end{enumerate}
 
 \section{Materials and methods}
