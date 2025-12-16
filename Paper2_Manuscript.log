@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.9)  16 DEC 2025 21:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.9)  16 DEC 2025 22:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -541,72 +541,75 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
  [4] [5]
-[6] (./paper2_outputs/tables/tab_packing_summary.tex)
-<paper2_outputs/figures/fig_retention_vs_porosity.png, id=128, 469.755pt x 325.
+[6] [7]
+Overfull \hbox (8.01451pt too wide) in paragraph at lines 178--179
+[]\OT1/cmr/m/n/12 Figure []1[] vi-su-al-izes this non-monotonic re-la-tion-ship
+. The highest-porosity me-dia (pumice
+ []
+
+(./paper2_outputs/tables/tab_packing_summary.tex)
+<paper2_outputs/figures/fig_retention_vs_porosity.png, id=187, 469.755pt x 325.
 215pt>
 File: paper2_outputs/figures/fig_retention_vs_porosity.png Graphic file (type p
 ng)
 <use paper2_outputs/figures/fig_retention_vs_porosity.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_retention_vs_porosity.png  
-used on input line 180.
+used on input line 184.
 (pdftex.def)             Requested size: 364.19667pt x 252.1333pt.
- [7 <./paper2_outputs/figures/fig_retention_vs_porosity.png>]
+ [8 <./paper2_outputs/figures/fig_retention_vs_porosity.png>]
+Overfull \hbox (6.29555pt too wide) in paragraph at lines 197--198
+[]\OT1/cmr/m/n/12 Figure []2[] demon-strates that pos-te-rior pre-dic-tive curv
+es closely tracked ob-served pressure-
+ []
+
 (./paper2_outputs/tables/tab_hydraulic_signature.tex)
-<paper2_outputs/figures/fig_pressure_drop_pea_gravels.png, id=140, 469.755pt x 
+<paper2_outputs/figures/fig_pressure_drop_pea_gravels.png, id=199, 469.755pt x 
 325.215pt>
 File: paper2_outputs/figures/fig_pressure_drop_pea_gravels.png Graphic file (ty
 pe png)
 <use paper2_outputs/figures/fig_pressure_drop_pea_gravels.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_pressure_drop_pea_gravels.p
-ng  used on input line 196.
+ng  used on input line 203.
 (pdftex.def)             Requested size: 218.51521pt x 151.27798pt.
-<paper2_outputs/figures/fig_pressure_drop_glass_marbles.png, id=141, 469.755pt 
+<paper2_outputs/figures/fig_pressure_drop_glass_marbles.png, id=200, 469.755pt 
 x 325.215pt>
 File: paper2_outputs/figures/fig_pressure_drop_glass_marbles.png Graphic file (
 type png)
 <use paper2_outputs/figures/fig_pressure_drop_glass_marbles.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_pressure_drop_glass_marbles
-.png  used on input line 197.
+.png  used on input line 204.
 (pdftex.def)             Requested size: 218.51521pt x 151.27798pt.
-<paper2_outputs/figures/fig_pressure_drop_white_pebbles.png, id=142, 469.755pt 
+<paper2_outputs/figures/fig_pressure_drop_white_pebbles.png, id=201, 469.755pt 
 x 325.215pt>
 File: paper2_outputs/figures/fig_pressure_drop_white_pebbles.png Graphic file (
 type png)
 <use paper2_outputs/figures/fig_pressure_drop_white_pebbles.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_pressure_drop_white_pebbles
-.png  used on input line 198.
+.png  used on input line 205.
 (pdftex.def)             Requested size: 218.51521pt x 151.27798pt.
-<paper2_outputs/figures/fig_pressure_drop_small_pumice_stones.png, id=143, 469.
+<paper2_outputs/figures/fig_pressure_drop_small_pumice_stones.png, id=202, 469.
 755pt x 325.215pt>
 File: paper2_outputs/figures/fig_pressure_drop_small_pumice_stones.png Graphic 
 file (type png)
 <use paper2_outputs/figures/fig_pressure_drop_small_pumice_stones.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_pressure_drop_small_pumice_
-stones.png  used on input line 199.
+stones.png  used on input line 206.
 (pdftex.def)             Requested size: 218.51521pt x 151.27798pt.
-<paper2_outputs/figures/fig_pressure_drop_medium_pumice_stones.png, id=144, 469
+<paper2_outputs/figures/fig_pressure_drop_medium_pumice_stones.png, id=203, 469
 .755pt x 325.215pt>
 File: paper2_outputs/figures/fig_pressure_drop_medium_pumice_stones.png Graphic
  file (type png)
 <use paper2_outputs/figures/fig_pressure_drop_medium_pumice_stones.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_pressure_drop_medium_pumice
-_stones.png  used on input line 200.
+_stones.png  used on input line 207.
 (pdftex.def)             Requested size: 218.51521pt x 151.27798pt.
- [8] [9 <./paper2_outputs/figures/fig_pressure_drop_pea_gravels.png> <./paper2_
-outputs/figures/fig_pressure_drop_glass_marbles.png> <./paper2_outputs/figures/
-fig_pressure_drop_white_pebbles.png> <./paper2_outputs/figures/fig_pressure_dro
-p_small_pumice_stones.png> <./paper2_outputs/figures/fig_pressure_drop_medium_p
-umice_stones.png>]
-(./paper2_outputs/tables/tab_retention_combined.tex)
-Overfull \hbox (7.13535pt too wide) in paragraph at lines 216--217
-\OT1/cmr/m/n/12 bles []4[]--[]6[]. The vol-u-met-ric model yielded a pos-i-tive
- pos-te-rior mean slope for logit-transformed
- []
-
-(./paper2_outputs/tables/tab_retention_volumetric.tex)
-(./paper2_outputs/tables/tab_retention_hydraulic.tex)
-(./paper2_outputs/tables/tab_retention_gdi.tex) [10]
-<paper2_outputs/figures/fig_forest_beta_volumetric.png, id=175, 433.62pt x 295.
+ [9] [10 <./paper2_outputs/figures/fig_pressure_drop_pea_gravels.png> <./paper2
+_outputs/figures/fig_pressure_drop_glass_marbles.png> <./paper2_outputs/figures
+/fig_pressure_drop_white_pebbles.png> <./paper2_outputs/figures/fig_pressure_dr
+op_small_pumice_stones.png> <./paper2_outputs/figures/fig_pressure_drop_medium_
+pumice_stones.png>]
+(./paper2_outputs/tables/tab_stage2_consolidated.tex)
+<paper2_outputs/figures/fig_forest_beta_volumetric.png, id=222, 433.62pt x 295.
 5843pt>
 File: paper2_outputs/figures/fig_forest_beta_volumetric.png Graphic file (type 
 png)
@@ -614,7 +617,7 @@ png)
 Package pdftex.def Info: paper2_outputs/figures/fig_forest_beta_volumetric.png 
  used on input line 226.
 (pdftex.def)             Requested size: 218.51521pt x 148.95543pt.
-<paper2_outputs/figures/fig_forest_beta_hydraulic.png, id=176, 433.62pt x 303.5
+<paper2_outputs/figures/fig_forest_beta_hydraulic.png, id=223, 433.62pt x 303.5
 34pt>
 File: paper2_outputs/figures/fig_forest_beta_hydraulic.png Graphic file (type p
 ng)
@@ -622,7 +625,7 @@ ng)
 Package pdftex.def Info: paper2_outputs/figures/fig_forest_beta_hydraulic.png  
 used on input line 227.
 (pdftex.def)             Requested size: 218.51521pt x 152.96156pt.
-<paper2_outputs/figures/fig_forest_beta_combined.png, id=177, 433.62pt x 310.76
+<paper2_outputs/figures/fig_forest_beta_combined.png, id=224, 433.62pt x 310.76
 1pt>
 File: paper2_outputs/figures/fig_forest_beta_combined.png Graphic file (type pn
 g)
@@ -630,7 +633,7 @@ g)
 Package pdftex.def Info: paper2_outputs/figures/fig_forest_beta_combined.png  u
 sed on input line 228.
 (pdftex.def)             Requested size: 218.51521pt x 156.6035pt.
-<paper2_outputs/figures/fig_forest_beta_gdi.png, id=178, 433.62pt x 295.5843pt>
+<paper2_outputs/figures/fig_forest_beta_gdi.png, id=225, 433.62pt x 295.5843pt>
 
 File: paper2_outputs/figures/fig_forest_beta_gdi.png Graphic file (type png)
 <use paper2_outputs/figures/fig_forest_beta_gdi.png>
@@ -638,75 +641,76 @@ Package pdftex.def Info: paper2_outputs/figures/fig_forest_beta_gdi.png  used o
 n input line 229.
 (pdftex.def)             Requested size: 218.51521pt x 148.95543pt.
  [11]
-Overfull \hbox (17.58432pt too wide) in paragraph at lines 235--236
-\OT1/cmr/m/n/12 Model com-par-i-son us-ing Pareto-smoothed im-por-tance sam-pli
-ng leave-one-out cross-validation
+Overfull \hbox (4.9337pt too wide) in paragraph at lines 234--234
+[]\OT1/cmr/bx/n/14.4 Model com-par-i-son: pre-dic-tive ev-i-dence from cross-va
+lidation 
  []
 
-(./paper2_outputs/tables/tab_model_comparison.tex) [12 <./paper2_outputs/figure
-s/fig_forest_beta_volumetric.png> <./paper2_outputs/figures/fig_forest_beta_hyd
-raulic.png> <./paper2_outputs/figures/fig_forest_beta_combined.png> <./paper2_o
-utputs/figures/fig_forest_beta_gdi.png>]
-(./paper2_outputs/tables/tab_retention_predictions.tex)
-<paper2_outputs/figures/fig_retention_vs_k.png, id=195, 469.755pt x 325.215pt>
+
+Overfull \hbox (14.08575pt too wide) in paragraph at lines 236--237
+\OT1/cmr/m/n/12 sults. The com-bined model achieved the high-est ex-pected log 
+pre-dic-tive den-sity ($[][] =
+ []
+
+(./paper2_outputs/tables/tab_model_comparison.tex)
+(./paper2_outputs/tables/tab_retention_predictions.tex) [12 <./paper2_outputs/f
+igures/fig_forest_beta_volumetric.png> <./paper2_outputs/figures/fig_forest_bet
+a_hydraulic.png> <./paper2_outputs/figures/fig_forest_beta_combined.png> <./pap
+er2_outputs/figures/fig_forest_beta_gdi.png>]
+<paper2_outputs/figures/fig_retention_vs_k.png, id=245, 469.755pt x 325.215pt>
 File: paper2_outputs/figures/fig_retention_vs_k.png Graphic file (type png)
 <use paper2_outputs/figures/fig_retention_vs_k.png>
 Package pdftex.def Info: paper2_outputs/figures/fig_retention_vs_k.png  used on
- input line 247.
+ input line 250.
 (pdftex.def)             Requested size: 318.66948pt x 220.61726pt.
- [13]
-Overfull \hbox (20.03845pt too wide) in paragraph at lines 253--254
-\OT1/cmr/m/n/12 specific sig-na-tures pro-vide ad-di-tional in-for-ma-tion that
- is con-sis-tent with a packing-conditioned
+ [13 <./paper2_outputs/figures/fig_retention_vs_k.png>] (./paper2_outputs/table
+s/tab_posterior_rankings.tex)
+[14] [15] [16]
+Overfull \hbox (27.11894pt too wide) in paragraph at lines 334--335
+\OT1/cmr/m/n/12 pri-or-i-tize fric-tional damp-ing characteristics---quantifiab
+le through the Forch-heimer coefficient---
  []
 
-No file Paper2_Manuscript.bbl.
-[14 <./paper2_outputs/figures/fig_retention_vs_k.png>] (./Paper2_Manuscript.aux
-)
+(./Paper2_Manuscript.bbl
+
+Package natbib Warning: Empty `thebibliography' environment on input line 3.
+
+) [17] (./Paper2_Manuscript.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Paper2_Manuscript.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Paper2_Manuscript.out':
-(rerunfilecheck)             Before: 9E34E7647F9C07CCE83E3F4E25BC385B;2370
-(rerunfilecheck)             After:  A84535C9A12FD0B9DEBF4C668DB5DFA7;5398.
+Package rerunfilecheck Info: File `Paper2_Manuscript.out' has not changed.
+(rerunfilecheck)             Checksum: EB16E40AE82487322454178D5245A26B;6952.
  ) 
 Here is how much of TeX's memory you used:
- 16114 strings out of 474116
- 312803 string characters out of 5743683
- 1943187 words of memory out of 5000000
- 38201 multiletter control sequences out of 15000+600000
- 567956 words of font info for 74 fonts, out of 8000000 for 9000
+ 16144 strings out of 474116
+ 312837 string characters out of 5743683
+ 1940187 words of memory out of 5000000
+ 38217 multiletter control sequences out of 15000+600000
+ 569204 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,80p,1596b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,80p,1982b,997s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
-r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/lo
-cal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
-/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/
-2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2
-024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Paper2_Manuscript.pdf (14 pages, 1090006 bytes).
+/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
+2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2
+024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/20
+24/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Paper2_Manuscript.pdf (17 pages, 1114822 bytes).
 PDF statistics:
- 293 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
- 75 named destinations out of 1000 (max. 500000)
- 152 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 375 PDF objects out of 1000 (max. 8388607)
+ 299 compressed objects within 3 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 272 words of extra memory for PDF output out of 10000 (max. 10000000)
 
